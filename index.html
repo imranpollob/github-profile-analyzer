@@ -4,10 +4,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GitLens</title>
+  <title>GitLens — GitHub Profile Analyzer &amp; Developer Insights</title>
+
+  <!-- GitHub Pages Single Page App routing restoration -->
+  <script type="text/javascript">
+    (function (l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function (s) {
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location))
+  </script>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="GitLens — GitHub Profile Analyzer &amp; Developer Insights" />
+  <meta name="description"
+    content="Discover in-depth GitHub profile analytics, language snapshots, public activity timelines, head-to-head developer comparison, and shareable developer cards. Crafted by Imran Pollob." />
+  <meta name="keywords"
+    content="GitHub profile analyzer, GitHub stats, developer portfolio, language breakdown, GitHub comparison, developer intelligence, Imran Pollob, GitLens" />
+  <meta name="author" content="Imran Pollob" />
+  <meta name="theme-color" content="#0d9488" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#071311" media="(prefers-color-scheme: dark)" />
+  <link rel="canonical" href="https://imranpollob.github.io/github-profile-analyzer/" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="./favicon.png" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://imranpollob.github.io/github-profile-analyzer/" />
+  <meta property="og:site_name" content="GitLens by Imran Pollob" />
+  <meta property="og:title" content="GitLens — GitHub Profile Analyzer &amp; Developer Insights" />
+  <meta property="og:description"
+    content="Discover in-depth GitHub profile analytics, language snapshots, public activity timelines, head-to-head developer comparison, and shareable developer cards." />
+  <meta property="og:image" content="https://imranpollob.github.io/github-profile-analyzer/brand-logo.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://imranpollob.github.io/github-profile-analyzer/" />
+  <meta name="twitter:title" content="GitLens — GitHub Profile Analyzer &amp; Developer Insights" />
+  <meta name="twitter:description"
+    content="Discover in-depth GitHub profile analytics, language snapshots, public activity timelines, head-to-head developer comparison, and shareable developer cards." />
+  <meta name="twitter:image" content="https://imranpollob.github.io/github-profile-analyzer/brand-logo.png" />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Structured Data: WebApplication JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "GitLens",
+    "url": "https://imranpollob.github.io/github-profile-analyzer/",
+    "description": "Interactive GitHub Profile Analyzer and Developer Insights platform with comparison mode, repository explorer, and activity streams.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "author": {
+      "@type": "Person",
+      "name": "Imran Pollob",
+      "url": "https://github.com/imranpollob"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "GitHub Profile Overview & Star Tallies",
+      "Language Snapshot & Distribution",
+      "Developer Head-to-Head Comparison",
+      "Recent Public Activity Timeline",
+      "Repository Deep Filter & Search",
+      "Shareable Developer Card & README Badge"
+    ]
+  }
+  </script>
 </head>
 
 <body>

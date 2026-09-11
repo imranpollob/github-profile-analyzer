@@ -1,0 +1,102 @@
+.skeleton-shimmer {
+  background: linear-gradient(90deg,
+      var(--color-border) 25%,
+      var(--color-surface) 50%,
+      var(--color-border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite ease-in-out;
+  border-radius: var(--radius-sm);
+  opacity: 0.6;
+}
+
+[data-theme="dark"] .skeleton-shimmer {
+  background: linear-gradient(90deg,
+      #132b27 25%,
+      #1f3a35 50%,
+      #132b27 75%);
+  background-size: 200% 100%;
+  opacity: 0.8;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-card {
+  pointer-events: none;
+}
+
+.skeleton-profile-header {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.skeleton-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.skeleton-profile-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skeleton-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.skeleton-stat-box {
+  padding: 0.85rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.skeleton-circle-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.skeleton-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.skeleton-repo-card {
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+@media (max-width: 640px) {
+  .skeleton-profile-header {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}

@@ -4,42 +4,137 @@
   gap: 1.25rem;
 }
 
+.highlights__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 .highlights__grid {
   display: grid;
   gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .highlight-card {
-  padding: 1.1rem 1.25rem;
-  border-radius: 1rem;
-  background: var(--bg-muted);
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  min-height: 200px;
+  gap: 1rem;
+  transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
-.highlight-card h4 {
-  margin: 0;
-  font-size: 1.05rem;
+.highlight-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
 }
 
-.highlight-card p {
-  color: var(--text-muted);
+.highlight-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.highlight-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--subtle-bg);
+}
+
+.highlight-icon.trophy {
+  color: #f59e0b;
+}
+
+.highlight-icon.history {
+  color: #0284c7;
+}
+
+.highlight-icon.zap {
+  color: var(--brand-500);
+}
+
+.highlight-badge-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight-title {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.highlight-subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.highlight-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
   flex: 1;
 }
 
-.highlight-card .meta,
-.highlight-card .footer {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.highlight-repo-name a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  color: var(--color-primary);
 }
 
-.highlight-card .badge {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
-  font-size: 0.75rem;
-  font-weight: 600;
+.highlight-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.highlight-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+}
+
+.highlight-stats-duo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.highlight-stats-duo span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+}
+
+.highlight-footer {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.65rem;
+}
+
+.empty-highlight {
+  margin: 1.5rem 0;
+  text-align: center;
 }

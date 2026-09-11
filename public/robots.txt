@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imranpollob.github.io/github-profile-analyzer/sitemap.xml

@@ -1,97 +1,196 @@
 .profile {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 2rem;
 }
 
 .profile__header {
   display: flex;
-  gap: 1.5rem;
-  align-items: center;
+  gap: 2rem;
+  align-items: flex-start;
 }
 
-.profile__avatar-wrapper {
-  width: 128px;
-  height: 128px;
-  padding: 4px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.45), rgba(99, 102, 241, 0.45));
+.profile__avatar-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
 }
 
 .profile__avatar {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   object-fit: cover;
+  position: relative;
+  z-index: 2;
+  border: 3px solid var(--card-bg);
+}
+
+.avatar-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--brand-400), var(--brand-700));
+  z-index: 1;
 }
 
 .profile__meta {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.85rem;
+  flex: 1;
 }
 
-.profile__username {
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.profile__bio {
-  color: var(--text-muted);
-}
-
-.profile__links {
+.profile__name-row {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-.profile__links a {
-  font-size: 0.9rem;
-  color: var(--accent);
+.profile__fullname {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  line-height: 1.1;
+}
+
+.profile__username {
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin-top: 0.2rem;
+}
+
+.profile__action-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.action-pill {
+  padding: 0.45rem 0.85rem;
+  font-size: var(--font-size-xs);
+  border-radius: var(--radius-full);
+}
+
+.action-pill.highlight {
+  background: var(--brand-600);
+  color: #fff;
+}
+
+.action-pill.highlight:hover {
+  background: var(--brand-700);
+  color: #fff;
+}
+
+.profile__bio {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  max-width: 750px;
 }
 
 .profile__details {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1rem;
-}
-
-.detail {
-  padding: 0.85rem 1rem;
-  border-radius: 1rem;
-  background: var(--bg-muted);
   display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
 }
 
-.detail__label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
+.detail-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
-.detail__value {
-  font-weight: 600;
-  color: var(--text-strong);
+.detail-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
 }
 
-.profile__stats {
+.profile__stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1.25rem;
-  text-align: center;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+}
+
+.stat-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-card-icon.followers {
+  background: rgba(13, 148, 136, 0.12);
+  color: var(--brand-600);
+}
+
+.stat-card-icon.following {
+  background: rgba(2, 132, 199, 0.12);
+  color: #0284c7;
+}
+
+.stat-card-icon.repos {
+  background: rgba(124, 58, 237, 0.12);
+  color: #7c3aed;
+}
+
+.stat-card-icon.stars {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+.stat-card-icon.forks {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
 }
 
 @media (max-width: 680px) {
   .profile__header {
     flex-direction: column;
+    align-items: center;
     text-align: center;
   }
 
-  .profile__links {
+  .profile__name-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile__details {
+    justify-content: center;
+  }
+
+  .profile__action-pills {
     justify-content: center;
   }
 }

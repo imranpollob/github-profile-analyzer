@@ -11,6 +11,7 @@ export interface GithubUser {
   followers: number;
   following: number;
   public_repos: number;
+  public_gists?: number;
   created_at: string;
 }
 
@@ -31,6 +32,7 @@ export interface GithubRepo {
   fork: boolean;
   size: number;
   topics?: string[];
+  homepage?: string | null;
 }
 
 export interface GithubSearchUser {
@@ -40,18 +42,51 @@ export interface GithubSearchUser {
   html_url: string;
 }
 
+export interface GithubEvent {
+  id: string;
+  type: string;
+  created_at: string;
+  repo: {
+    id: number;
+    name: string;
+    url: string;
+  };
+  payload: {
+    action?: string;
+    ref?: string;
+    ref_type?: string;
+    commits?: Array<{
+      sha: string;
+      message: string;
+      author: { name: string; email: string };
+    }>;
+    issue?: {
+      title: string;
+      number: number;
+      html_url: string;
+    };
+    pull_request?: {
+      title: string;
+      number: number;
+      html_url: string;
+    };
+  };
+}
+
 const API_BASE = 'https://api.github.com';
 const DEFAULT_HEADERS: Record<string, string> = {
   Accept: 'application/vnd.github+json'
 };
 
-class GithubError extends Error {
+export class GithubError extends Error {
   status: number;
+  rateLimitExceeded: boolean;
 
   constructor(message: string, status: number) {
     super(message);
     this.name = 'GithubError';
     this.status = status;
+    this.rateLimitExceeded = status === 403 || message.toLowerCase().includes('rate limit');
   }
 }
 
@@ -63,8 +98,8 @@ async function handleResponse<T>(response: Response): Promise<T> {
       if (payload && typeof payload.message === 'string') {
         message = payload.message;
       }
-    } catch (error) {
-      // ignore JSON parse issues for error responses
+    } catch {
+      // ignore JSON parse errors
     }
 
     throw new GithubError(message, response.status);
@@ -91,7 +126,7 @@ export async function fetchUserRepos(username: string): Promise<GithubRepo[]> {
   const results: GithubRepo[] = [];
   let page = 1;
   let hasNext = true;
-  const maxPages = 5; // safeguard against extreme pagination / rate limits
+  const maxPages = 5;
 
   while (hasNext && page <= maxPages) {
     const response = await fetch(
@@ -107,6 +142,14 @@ export async function fetchUserRepos(username: string): Promise<GithubRepo[]> {
   return results;
 }
 
+export async function fetchUserEvents(username: string): Promise<GithubEvent[]> {
+  const response = await fetch(
+    `${API_BASE}/users/${encodeURIComponent(username)}/events?per_page=30`,
+    { headers: DEFAULT_HEADERS }
+  );
+  return handleResponse<GithubEvent[]>(response);
+}
+
 export async function searchUsers(query: string): Promise<GithubSearchUser[]> {
   if (!query.trim()) return [];
 
@@ -117,5 +160,3 @@ export async function searchUsers(query: string): Promise<GithubSearchUser[]> {
   const payload = await handleResponse<{ items: GithubSearchUser[] }>(response);
   return payload.items;
 }
-
-export { GithubError };

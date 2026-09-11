@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  width: 100%;
+  position: relative;
 }
 
 .search-form.hero {
@@ -11,42 +13,90 @@
 
 .search-form.hero .search-form__form {
   width: min(640px, 100%);
-  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.25);
+  box-shadow: var(--shadow-xl);
+  padding: 0.6rem;
+  border-radius: var(--radius-lg);
+}
+
+.search-form.compact {
+  position: relative;
+  width: 100%;
+}
+
+.search-form.compact .search-suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 500;
 }
 
 .search-form__form {
   display: flex;
   gap: 0.65rem;
-  padding: 0.8rem;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 1.1rem;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 0.45rem;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.search-form__form:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  padding: 0 0.5rem;
+}
+
+.search-input-icon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
 }
 
 .search-form__input {
   flex: 1;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   border: none;
   background: transparent;
-  padding: 0.5rem 0.65rem;
+  padding: 0.5rem 0.25rem;
+  color: var(--color-text);
+  box-shadow: none;
 }
 
 .search-form__input:focus {
   outline: none;
+  box-shadow: none;
 }
 
-.search-form.compact .search-form__form {
-  background: rgba(255, 255, 255, 0.85);
-  padding: 0.5rem 0.65rem;
-  border-radius: 0.85rem;
+.search-submit-btn {
+  white-space: nowrap;
+  gap: 0.4rem;
 }
 
-.search-form.compact .search-form__input {
-  font-size: 0.95rem;
+.search-loading-icon {
+  color: var(--color-primary);
 }
 
-.search-form.compact .primary {
-  padding: 0.55rem 0.9rem;
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .search-suggestions {
@@ -55,64 +105,91 @@
   flex-direction: column;
   gap: 0.45rem;
   align-self: center;
-  color: var(--text-strong);
+  position: relative;
+}
+
+.empty-suggestion-box {
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
 }
 
 .hint {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
 }
 
 .hint.error {
-  color: var(--danger);
+  color: var(--color-error);
 }
 
 .suggestion-list {
   margin: 0;
-  padding: 0.25rem;
+  padding: 0.35rem;
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  background: #ffffff;
-  border-radius: 0.9rem;
-  border: 1px solid var(--border);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(10px);
 }
 
-.suggestion-list li button {
+.suggestion-item {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 0.75rem;
   background: transparent;
-  border-radius: 0.75rem;
-  padding: 0.55rem 0.75rem;
-  color: var(--text-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+  color: var(--color-text);
   border: none;
   text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-.suggestion-list li button:hover {
-  background: rgba(148, 163, 184, 0.18);
+.suggestion-item:hover {
+  background: var(--subtle-bg);
+  color: var(--color-primary);
 }
 
-.suggestion-list img {
+.suggestion-avatar {
   width: 32px;
   height: 32px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+}
+
+.suggestion-login {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  flex: 1;
+}
+
+.suggestion-arrow {
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.suggestion-item:hover .suggestion-arrow {
+  opacity: 1;
+  transform: translateX(2px);
 }
 
 @media (max-width: 600px) {
-  .search-form__form {
+  .search-form.hero .search-form__form {
     flex-direction: column;
   }
 
-  .search-form__input {
-    width: 100%;
-  }
-
-  .search-form__form .primary {
+  .search-submit-btn {
     width: 100%;
   }
 }
