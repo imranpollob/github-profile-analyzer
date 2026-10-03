@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Scale, Compass, Heart } from 'lucide-react';
 import { GithubIcon } from '../components/icons';
@@ -7,6 +7,17 @@ import './app-shell.css';
 
 const AppShell: React.FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation();
+
+  // If launcher.js mounted before React rendered the slot, it fell back
+  // to a floating button: move it into the header instead.
+  useEffect(() => {
+    const slot = document.querySelector('[data-brand-launcher]');
+    const toggle = document.querySelector('.bl-toggle.bl-floating');
+    if (slot && toggle) {
+      toggle.classList.remove('bl-floating');
+      slot.replaceWith(toggle);
+    }
+  }, []);
 
   return (
     <div className="app-shell">
@@ -54,6 +65,7 @@ const AppShell: React.FC<PropsWithChildren> = ({ children }) => {
           >
             <GithubIcon size={18} />
           </a>
+          <span data-brand-launcher></span>
         </div>
       </header>
 
