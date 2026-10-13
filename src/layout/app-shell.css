@@ -147,6 +147,40 @@
   color: var(--color-primary-hover);
 }
 
+/* Personal brand tools launcher: match the header icon buttons. */
+.header-actions .bl-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--radius-full);
+  background: var(--subtle-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+}
+
+.header-actions .bl-toggle:hover,
+.header-actions .bl-toggle[aria-expanded="true"] {
+  background: var(--brand-100);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .header-actions .bl-toggle:hover,
+[data-theme="dark"] .header-actions .bl-toggle[aria-expanded="true"] {
+  background: var(--brand-900);
+  color: var(--color-primary-hover);
+}
+
+.header-actions .bl-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
 .app-main {
   padding: clamp(1.25rem, 4vw, 3rem);
   max-width: 1200px;
@@ -225,5 +259,29 @@
 
   .nav-link {
     padding: 0.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    gap: 0.25rem;
+    padding: 0.75rem;
+  }
+
+  .brand-name {
+    font-size: var(--font-size-base);
+  }
+
+  .brand-badge {
+    display: none;
+  }
+
+  .brand-logo-img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
   }
 }
