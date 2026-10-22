@@ -26,7 +26,9 @@ const AppShell: React.FC<PropsWithChildren> = ({ children }) => {
           <Link to="/" className="brand-logo" aria-label="GitLens Home">
             <img
               src={`${import.meta.env.BASE_URL}brand-logo.png`}
-              alt="Imran Pollob Brand Logo"
+              alt="GitLens logo"
+              width={36}
+              height={36}
               className="brand-logo-img"
             />
             <div className="brand-text">
@@ -74,7 +76,7 @@ const AppShell: React.FC<PropsWithChildren> = ({ children }) => {
       <footer className="app-footer">
         <div className="footer-content">
           <div className="footer-left">
-            <img src={`${import.meta.env.BASE_URL}brand-logo.png`} alt="" className="footer-logo" />
+            <img src={`${import.meta.env.BASE_URL}brand-logo.png`} alt="" width={24} height={24} className="footer-logo" />
             <span>GitLens by <a href="https://github.com/imranpollob" target="_blank" rel="noreferrer"><strong>Imran Pollob</strong></a></span>
           </div>
           <div className="footer-right">

@@ -54,7 +54,24 @@ export const DevCardExport: React.FC<DevCardExportProps> = ({
     }
   };
 
-  const downloadSvgCard = () => {
+  const downloadSvgCard = async () => {
+    // Embed the logo so the downloaded card also works offline.
+    let logoDataUrl: string;
+    try {
+      const response = await fetch(`${import.meta.env.BASE_URL}brand-logo.png`);
+      if (!response.ok) throw new Error('Logo could not be loaded');
+      const logoBlob = await response.blob();
+      logoDataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(logoBlob);
+      });
+    } catch {
+      showToast('Could not load the logo. Please try downloading again.', 'error');
+      return;
+    }
+
     const svgContent = `
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="340" viewBox="0 0 600 340">
   <defs>
@@ -70,11 +87,8 @@ export const DevCardExport: React.FC<DevCardExportProps> = ({
 
   <rect width="560" height="300" x="20" y="20" rx="16" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#2dd4bf" stroke-width="1.5" />
 
-  <!-- Monogram Logo Watermark -->
-  <g transform="translate(500, 45)" opacity="0.3">
-    <circle cx="20" cy="20" r="18" fill="none" stroke="#ffffff" stroke-width="2" />
-    <text x="20" y="26" font-family="Outfit, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">iP</text>
-  </g>
+  <!-- GitLens Logo Watermark -->
+  <image href="${logoDataUrl}" x="496" y="41" width="48" height="48" opacity="0.3" />
 
   <!-- User Info -->
   <text x="50" y="75" font-family="Outfit, sans-serif" font-size="28" font-weight="bold" fill="#ffffff">${escapeXml(user.name || user.login)}</text>
@@ -157,7 +171,13 @@ export const DevCardExport: React.FC<DevCardExportProps> = ({
           {/* Card Preview */}
           <div ref={cardRef} className="devcard-preview">
             <div className="devcard-watermark">
-              <span className="devcard-watermark-text">GitLens</span>
+              <img
+                src={`${import.meta.env.BASE_URL}brand-logo.png`}
+                alt="GitLens logo"
+                width={48}
+                height={48}
+                className="devcard-watermark-logo"
+              />
             </div>
 
             <div className="devcard-user-info">

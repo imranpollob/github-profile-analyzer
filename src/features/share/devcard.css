@@ -29,12 +29,11 @@
   opacity: 0.3;
 }
 
-.devcard-watermark-text {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  color: #fff;
+.devcard-watermark-logo {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .devcard-user-info {
